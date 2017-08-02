@@ -3,8 +3,9 @@ package ru.neochess.phase0.client.State;
 
 import ru.neochess.phase0.client.ChessBoard;
 import javax.swing.JOptionPane;
-import ru.neochess.phase0.client.CheMessage.ChessMessage.*;
-
+import ru.neochess.phase0.client.CheMessage.ChessMessage.NeoCheMessage;
+import ru.neochess.phase0.client.CheMessage.ChessMessage;
+import ru.neochess.phase0.client.CheMessage.ChessMessage.User;
 /**
  * Created by TiJi on 03.01.17.
  */

@@ -1,13 +1,10 @@
 package ru.neochess.phase0.client.State;
-import ru.neochess.phase0.client.CheMessage.ChessMessage.*;
 
 import ru.neochess.phase0.client.ChessBoard;
-import ru.neochess.phase0.client.CheMessage.*;
+
 import javax.swing.*;
-import ru.neochess.core.*;
-
-
-
+import ru.neochess.phase0.client.CheMessage.ChessMessage.NeoCheMessage;
+import ru.neochess.phase0.client.CheMessage.ChessMessage;
 /**
  * Created by TiJi on 03.12.16.
  */

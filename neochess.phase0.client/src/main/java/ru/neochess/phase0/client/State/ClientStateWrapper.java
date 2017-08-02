@@ -1,9 +1,8 @@
 package ru.neochess.phase0.client.State;
-import ru.neochess.phase0.client.CheMessage.ChessMessage.*;
 import ru.neochess.phase0.client.ChessBoard;
 import ru.neochess.phase0.client.ChessServerConnection;
 import ru.neochess.phase0.client.SessionData.SessionData;
-
+import ru.neochess.phase0.client.CheMessage.ChessMessage.NeoCheMessage;
 /**
  * Created by TiJi on 04.01.17.
  */

@@ -3,7 +3,7 @@ package ru.neochess.phase0.client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import ru.neochess.phase0.client.CheMessage.ChessMessage.*;
+import ru.neochess.phase0.client.CheMessage.ChessMessage.NeoCheMessage;
 /**
  * Created by for on 29.10.16.
  */

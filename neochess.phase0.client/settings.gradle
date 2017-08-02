@@ -1,2 +1,10 @@
 rootProject.name = 'neochess.phase0.client'
 
+
+//include(':neochess.phase0.core')
+
+//include('Users/TiJi/.gradle/caches/modules-2/files-2.1/com.google.protobuf/protobuf-java/3.3.0/9f301d1a27501b1afcb2ed16aad428337dabf9e4/protobuf-java-3.3.0.jar')
+
+//includeBuild('../neochess.phase0.core')
+//project(':neochess.phase0.core').projectDir = new File('../neochess.phase0.core')
+
