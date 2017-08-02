@@ -41,7 +41,6 @@ public class ChessGame {
             }
         }
 
-
         return null;
     }
     public Player getPlayer1 ()

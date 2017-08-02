@@ -5,9 +5,8 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Vector;
 import CheMessage.ChessMessage.*;
+import CheMessage.*;
 
 /**
  * Created by for on 29.10.16.

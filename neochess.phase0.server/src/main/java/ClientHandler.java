@@ -1,11 +1,10 @@
 import java.io.*;
 import java.net.Socket;
-
+import CheMessage.ChessMessage.*;
+import CheMessage.ChessMessage;
+import CheMessage.*;
 
 import Game.*;
-import CheMessage.*;
-import CheMessage.ChessMessage.*;
-
 
 
 /**

@@ -1,0 +1,5 @@
+rootProject.name = 'phase0'
+include('neochess.phase0.client')
+include('neochess.phase0.core2')
+include('neochess.phase0.server')
+
