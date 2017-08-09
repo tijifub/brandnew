@@ -87,7 +87,7 @@ public class StateReady extends State  implements ClientState {
     @Override
     public void sendState() {
 
-     //  wrapper.sessionData.userName = UserName;
+       wrapper.sessionData.userName = UserName;
 
       ChessMessage.User.Builder user = ChessMessage.User.newBuilder();
         user.setName(UserName);

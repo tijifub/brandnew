@@ -5,16 +5,13 @@ import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.List;
-import java.util.function.BiFunction;
-import java.io.File.*;
 import java.lang.Class;
 import java.lang.reflect.Method;
-import java.util.*;
 
 
 import ru.neochess.core.*;
-import ru.neochess.core.GeneratorsMove.*;
-import ru.neochess.core.GeneratorsMove.GeneratorMovePorcupine;
+import ru.neochess.core.GeneratorsMove.AnimalsMoves.*;
+import ru.neochess.core.GeneratorsMove.PeopleMoves.*;
 import ru.neochess.core.Move.Move;
 import ru.neochess.core.CoreBoard;
 

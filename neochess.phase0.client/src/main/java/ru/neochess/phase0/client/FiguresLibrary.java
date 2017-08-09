@@ -12,42 +12,42 @@ public class FiguresLibrary {
 
     private List<LibItem> items = new ArrayList<LibItem>() {
         {
-            add(new LibItem("A", "Агр", "/figures/animals/agr.png", "GeneratorMoveAgr",  (board, rc, figure) -> {
+            add(new LibItem("A", "Агр", "/figures/animals/agr.png", "AnimalsMoves.GeneratorMoveAgr",  (board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));
 
-            add(new LibItem("B", "Дикобраз", "/figures/animals/dkbrz.png", "GeneratorMovePorcupine", (board, rc, figure) -> {
+            add(new LibItem("B", "Дикобраз", "/figures/animals/dkbrz.png", "AnimalsMoves.GeneratorMovePorcupine", (board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));
 
-            add(new LibItem("C", "Дракон", "/figures/animals/drakon.png", "GeneratorMoveDragon",(board, rc, figure) -> {
+            add(new LibItem("C", "Дракон", "/figures/animals/drakon.png", "AnimalsMoves.GeneratorMoveDragon",(board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));
 
-            add(new LibItem("D", "Конь", "/figures/animals/kon.png","GeneratorMoveHorse", (board, rc, figure) -> {
+            add(new LibItem("D", "Конь", "/figures/animals/kon.png","AnimalsMoves.GeneratorMoveHorse", (board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));
 
-            add(new LibItem("E", "Носорог", "/figures/animals/nosrg.png","GeneratorMovePorcupine", (board, rc, figure) -> {
+            add(new LibItem("E", "Носорог", "/figures/animals/nosrg.png","AnimalsMoves.GeneratorMoveRhinoceros", (board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));
 
-            add(new LibItem("F", "Оборотень", "/figures/animals/obrtn.png","GeneratorMoveWerewolf", (board, rc, figure) -> {
+            add(new LibItem("F", "Оборотень", "/figures/animals/obrtn.png","AnimalsMoves.GeneratorMoveWerewolf", (board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));
 
-            add(new LibItem("G", "Вожак", "/figures/animals/vojak.png","GeneratorMoveLeader", (board, rc, figure) -> {
+            add(new LibItem("G", "Вожак", "/figures/animals/vojak.png","AnimalsMoves.GeneratorMoveLeader", (board, rc, figure) -> {
                     board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                     return board;
             }));
 
-            add(new LibItem("H", "Слон", "/figures/animals/slon.png","GeneratorMoveElephant", (board, rc, figure) -> {
+            add(new LibItem("H", "Слон", "/figures/animals/slon.png","AnimalsMoves.GeneratorMoveElephant", (board, rc, figure) -> {
                // figure = board.findFigureByCode();
 
                 int pos = figure.getMousePos();
@@ -105,22 +105,22 @@ public class FiguresLibrary {
 
 // -------------------------------------
 
-            add(new LibItem("I", "Король", "/figures/humans/korol.gif","GeneratorMoveKing", (board, rc, figure) -> {
+            add(new LibItem("I", "Король", "/figures/humans/korol.gif","PeopleMoves.GeneratorMoveKing", (board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));
 
-            add(new LibItem("J", "Королева", "/figures/humans/krlva.gif","GeneratorMoveQueen", (board, rc, figure) -> {
+            add(new LibItem("J", "Королева", "/figures/humans/krlva.gif","PeopleMoves.GeneratorMoveQueen", (board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));
 
-            add(new LibItem("K", "Ладья", "/figures/humans/ladya.gif","GeneratorMoveRook", (board, rc, figure) -> {
+            add(new LibItem("K", "Ладья", "/figures/humans/ladya.gif","PeopleMoves.GeneratorMoveRook", (board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));
 
-            add(new LibItem("L", "Лучник", "/figures/humans/luchnk.png","GeneratorMoveArcher", (board, rc, figure) -> {
+            add(new LibItem("L", "Лучник", "/figures/humans/luchnk.png","PeopleMoves.GeneratorMoveArcher", (board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));
@@ -130,12 +130,12 @@ public class FiguresLibrary {
                 return board;
             }));
 
-            add(new LibItem("N", "Офицер", "/figures/humans/ofcr.png","GeneratorMoveOfficer", (board, rc, figure) -> {
+            add(new LibItem("N", "Офицер", "/figures/humans/ofcr.png","PeopleMoves.GeneratorMoveOfficer", (board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));
 
-            add(new LibItem("O", "Пешка", "/figures/humans/peshka.png","GeneratorMovePawn", (board, rc, figure) -> {
+            add(new LibItem("O", "Пешка", "/figures/humans/peshka.png","PeopleMoves.GeneratorMovePawn", (board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));
@@ -145,7 +145,7 @@ public class FiguresLibrary {
                 return board;
             }));
 
-            add(new LibItem("R", "Пешка боевая", "/figures/humans/peshka_war.png","GeneratorMovePawnAttack", (board, rc, figure) -> {
+            add(new LibItem("R", "Пешка боевая", "/figures/humans/peshka_war.png","PeopleMoves.GeneratorMovePawnAttack", (board, rc, figure) -> {
                 board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                 return board;
             }));

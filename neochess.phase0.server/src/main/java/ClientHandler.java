@@ -62,14 +62,16 @@ public class ClientHandler extends Thread
 
         catch(Exception e)
         {
-           if ( messageIn.getState().equals("end")) {
+        /*   if ( messageIn.getState().equals("end")) {
+
+               System.out.println("game end e");
                game = server.games.stream().filter(game1 -> messageIn.getSessionId().equals(game1.gameID)).findAny().orElse(null);
 
                System.out.println("game end for gameID: " + game.gameID);
                if (game != null) {
                    server.sendMSG(game.getEnemy(messageIn.getUser(0).getId()).sock, messageIn);// мы просто пересылаем прешедшее сообщение сопернику (возможно стоет пересобрать и поменть статус на moved)
                }
-           }
+           }*/
 
             System.out.println("some disconnect :");
             System.out.println(e);
@@ -162,12 +164,30 @@ public class ClientHandler extends Thread
 
                 break;
             case "end":
-                game = server.games.stream().filter(game1 -> messageIn.getSessionId().equals(game1.gameID)).findAny().orElse(null);
-                System.out.println("game end for gameID: " + game.gameID);
-                if (game != null)
-                {
-                    server.sendMSG(game.getEnemy(messageIn.getUser(0).getId()).sock, messageIn);// мы просто пересылаем прешедшее сообщение сопернику (возможно стоет пересобрать и поменть статус на moved)
+
+                try {
+                    System.out.println("sesID" + messageIn.getSessionId());
+                    if  (messageIn.getSessionId().isEmpty() == false ) {
+                        System.out.println("game end1");
+                        game = server.games.stream().filter(game1 -> messageIn.getSessionId().equals(game1.gameID)).findAny().orElse(null);
+                        System.out.println("game end for gameID: " + game.gameID);
+                        server.sendMSG(game.getEnemy(messageIn.getUser(0).getId()).sock, messageIn);// мы просто пересылаем прешедшее сообщение сопернику (возможно стоет пересобрать и поменть статус на moved)
+                    }else {
+                        System.out.println("game end2");
+                        game = server.games.stream().filter(game1 -> messageIn.getUser(0).getName().equals(game1.getPlayer1().name)).findAny().orElse(null);
+
+                    }
+                    if (game != null) {
+                        server.games.remove(game);
+                    }
                 }
+                    catch (Exception e)
+                    {System.out.println("game end for gameID: " + e);
+
+                    }
+
+
+
 
                 break;
 

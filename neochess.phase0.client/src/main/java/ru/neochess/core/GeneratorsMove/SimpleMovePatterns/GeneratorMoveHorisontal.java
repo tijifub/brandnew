@@ -1,4 +1,4 @@
-package ru.neochess.core.GeneratorsMove;
+package ru.neochess.core.GeneratorsMove.SimpleMovePatterns;
 
 import ru.neochess.core.AdjacentCell;
 import ru.neochess.core.CellBoard;

@@ -1,4 +1,4 @@
-package ru.neochess.core.GeneratorsMove;
+package ru.neochess.core.GeneratorsMove.SimpleMovePatterns;
 
 import ru.neochess.core.AdjacentCell;
 import ru.neochess.core.CellBoard;
@@ -10,9 +10,9 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by TiJi on 11.04.17.
+ * Created by TiJi on 05.08.17.
  */
-public class GeneratorMoveLeader implements IGeneratorMove {
+public class GeneratorMoveOneStep {
 
     List<Move> result = new ArrayList<>();
 
@@ -24,12 +24,7 @@ public class GeneratorMoveLeader implements IGeneratorMove {
         Iterator<CellBoard> down = currentCell.getIterator(AdjacentCell.Down);
         Iterator<CellBoard> right = currentCell.getIterator(AdjacentCell.Right);
         Iterator<CellBoard> left = currentCell.getIterator(AdjacentCell.Left);
-        // Iterator<CellBoard> leftdown = currentCell.getIterator(AdjacentCell.LeftDown);
-        // Iterator<CellBoard> rightdown = currentCell.getIterator(AdjacentCell.RightDown);
-        // Iterator<CellBoard> leftUp = currentCell.getIterator(AdjacentCell.LeftUp);
-        // Iterator<CellBoard> rightUp = currentCell.getIterator(AdjacentCell.RightUp);
 
-        // движение вверх, вниз, вперед назад на одну клетку
         if (down.hasNext()) {
             next = down.next();
             //   if (next.getFigure() == null) {
@@ -64,4 +59,5 @@ public class GeneratorMoveLeader implements IGeneratorMove {
 
         return result;
     }
+
 }

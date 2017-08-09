@@ -64,7 +64,7 @@ public class UtiliteChess {
     protected void createDefaultProperties()
     {
         _properties.setProperty("Port", "5000");
-        _properties.setProperty("Host", "localhost");
+        _properties.setProperty("Host", "46.101.134.146");
         _properties.setProperty("Initial", _initialBoard);
         OutputStream output;
         try {

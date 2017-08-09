@@ -48,6 +48,7 @@ public class StateEnd extends State implements ClientState {
 
         User.Builder user = User.newBuilder();
         user.setId(wrapper.sessionData.userID);
+        user.setName(wrapper.sessionData.userName);
 
         NeoCheMessage.Builder messageBuilder =NeoCheMessage.newBuilder();
         messageBuilder.addUser(user);

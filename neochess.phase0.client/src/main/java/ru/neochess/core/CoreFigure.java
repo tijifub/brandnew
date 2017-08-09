@@ -15,7 +15,7 @@ public class CoreFigure {
     private TypeGamer typeGamer;
     private TypeFigure typeFigure;
 
-
+//для тестов?
     public CoreFigure(ArrayList<IGeneratorMove> generatorMove, TypeGamer typeGamer, TypeFigure typeFigure) {
         this.listGeneratorMove = generatorMove;
         this.typeGamer = typeGamer;

@@ -1,7 +1,8 @@
-package ru.neochess.core.GeneratorsMove;
+package ru.neochess.core.GeneratorsMove.AnimalsMoves;
 
 import ru.neochess.core.AdjacentCell;
 import ru.neochess.core.CellBoard;
+import ru.neochess.core.GeneratorsMove.IGeneratorMove;
 import ru.neochess.core.Move.Move;
 import ru.neochess.core.TypeGamer;
 

@@ -1,7 +1,8 @@
-package ru.neochess.core.GeneratorsMove;
+package ru.neochess.core.GeneratorsMove.AnimalsMoves;
 
 import ru.neochess.core.AdjacentCell;
 import ru.neochess.core.CellBoard;
+import ru.neochess.core.GeneratorsMove.IGeneratorMove;
 import ru.neochess.core.Move.Move;
 import ru.neochess.core.TypeGamer;
 
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Created by TiJi on 11.04.17.
  */
-public class GeneratorMoveRinoceros implements IGeneratorMove {
+public class GeneratorMoveRhinoceros implements IGeneratorMove {
 
     List<Move> result = new ArrayList<>();
 
@@ -24,11 +25,6 @@ public class GeneratorMoveRinoceros implements IGeneratorMove {
         Iterator<CellBoard> down = currentCell.getIterator(AdjacentCell.Down);
         Iterator<CellBoard> right = currentCell.getIterator(AdjacentCell.Right);
         Iterator<CellBoard> left = currentCell.getIterator(AdjacentCell.Left);
-       // Iterator<CellBoard> leftdown = currentCell.getIterator(AdjacentCell.LeftDown);
-       // Iterator<CellBoard> rightdown = currentCell.getIterator(AdjacentCell.RightDown);
-       // Iterator<CellBoard> leftUp = currentCell.getIterator(AdjacentCell.LeftUp);
-       // Iterator<CellBoard> rightUp = currentCell.getIterator(AdjacentCell.RightUp);
-
 
         // горизонтали
         //1.

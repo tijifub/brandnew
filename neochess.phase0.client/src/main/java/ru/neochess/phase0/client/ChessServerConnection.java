@@ -4,6 +4,9 @@ import ru.neochess.phase0.client.State.ClientStateWrapper;
 import java.io.*;
 import java.net.Socket;
 import ru.neochess.phase0.client.CheMessage.*;
+import javax.swing.*;
+
+import javax.swing.*;
 
 
 /**
@@ -49,6 +52,8 @@ public class ChessServerConnection
         catch(Exception e)
         {
             System.out.println(e);
+            JOptionPane.showMessageDialog(null,"Server connection problems. Host:" + HOST + ":" + PORT + " error" + e , "Server unreacheble", JOptionPane.PLAIN_MESSAGE);
+
         }
     }
 

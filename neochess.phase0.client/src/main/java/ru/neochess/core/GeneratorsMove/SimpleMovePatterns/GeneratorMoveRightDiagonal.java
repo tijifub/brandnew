@@ -1,4 +1,4 @@
-package ru.neochess.core.GeneratorsMove;
+package ru.neochess.core.GeneratorsMove.SimpleMovePatterns;
 
 import ru.neochess.core.AdjacentCell;
 import ru.neochess.core.CellBoard;
@@ -10,22 +10,38 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by TiJi on 26.04.17.
+ * Created by TiJi on 24.04.17.
  */
-public class GeneratorMoveVertical {
+public class GeneratorMoveRightDiagonal {
 
     List<Move> result = new ArrayList<>();
 
     public List<Move> getMove(CellBoard currentCell, TypeGamer typeGamer) {
         CellBoard next;
         Move move;
+        Iterator<CellBoard> rightUp = currentCell.getIterator(AdjacentCell.RightUp);
+        Iterator<CellBoard> leftdown = currentCell.getIterator(AdjacentCell.LeftDown);
 
-        Iterator<CellBoard> up = currentCell.getIterator(AdjacentCell.Up);
-        Iterator<CellBoard> down = currentCell.getIterator(AdjacentCell.Down);
+        do {
+            if (rightUp.hasNext()) {
+                next = rightUp.next();
+                move = createMove(currentCell, next);
+                result.add(move);
+            } else move = null;
+
+        } while (move != null);
+
+        do {
+            if (leftdown.hasNext()) {
+                next = leftdown.next();
+                move = createMove(currentCell, next);
+                result.add(move);
+            } else move = null;
+
+        } while (move != null);
 
         return result;
     }
-
     protected Move createMove(CellBoard currentCell, CellBoard next) {
 
         if (next.getCoreFigure() == null) {
@@ -39,4 +55,5 @@ public class GeneratorMoveVertical {
         result.add(new Move(currentCell, next, currentCell.getCoreFigure()));
 
     }
+
 }
