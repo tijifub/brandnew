@@ -1,5 +1,7 @@
 package ru.neochess.core;
 
+import java.util.Arrays;
+
 /**
  * Тип фигур
  * Created by diviz on 11.02.2017.
@@ -36,4 +38,6 @@ public enum TypeFigure {
     {
         return figureCode;
     }
+
+
 }

@@ -22,6 +22,8 @@ import java.util.List;
             Iterator<CellBoard> leftdown = currentCell.getIterator(AdjacentCell.LeftDown);
             Iterator<CellBoard> rightdown = currentCell.getIterator(AdjacentCell.RightDown);
             Iterator<CellBoard> up = currentCell.getIterator(AdjacentCell.Up);
+            Iterator<CellBoard> leftup = currentCell.getIterator(AdjacentCell.LeftUp);
+            Iterator<CellBoard> rightup = currentCell.getIterator(AdjacentCell.RightUp);
             boolean firstStep = false;
             boolean firstStepFromLeader = false;
 
@@ -33,11 +35,23 @@ import java.util.List;
 
                 CellBoard prev = up.next();
                 CoreFigure prevF = prev.getCoreFigure();
-                //  if (prev.getFigure().getTypeFigure().equals(TypeFigure.Leader)) // ход от вожака
                 if (prevF  != null) // ход от вожака
                     if (prevF.getTypeFigure().equals(TypeFigure.Leader))
                         firstStepFromLeader = true;
+
+                prev = leftup.next();
+                prevF = prev.getCoreFigure();
+                if (prevF  != null) // ход от вожака
+                    if (prevF.getTypeFigure().equals(TypeFigure.Leader))
+                        firstStepFromLeader = true;
+
+                prev = rightup.next();
+                prevF = prev.getCoreFigure();
+                 if (prevF  != null) // ход от вожака
+                    if (prevF.getTypeFigure().equals(TypeFigure.Leader))
+                        firstStepFromLeader = true;
             }
+
 
 
             //ход
@@ -75,22 +89,22 @@ import java.util.List;
             //аттака
             if (down.hasNext()) {
                 CellBoard next = down.next();
-                if (next.getCoreFigure() != null) {
+                if (next.getCoreFigure() != null && (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
                     result.add(new Move(currentCell, next,
                             currentCell.getCoreFigure()));
                 }
             }
 
-            if (leftdown.hasNext()) {
+            if (leftdown.hasNext() ) {
                 CellBoard next = leftdown.next();
-                if (next.getCoreFigure() != null) {
+                if (next.getCoreFigure() != null && (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
                     result.add(new Move(currentCell, next,
                             currentCell.getCoreFigure()));
                 }
             }
             if (rightdown.hasNext()) {
                 CellBoard next = rightdown.next();
-                if (next.getCoreFigure() != null) {
+                if ((next.getCoreFigure() != null) && (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
                     result.add(new Move(currentCell, next,
                             currentCell.getCoreFigure()));
                 }

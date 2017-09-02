@@ -186,18 +186,11 @@ public class ClientHandler extends Thread
 
                     }
 
-
-
-
                 break;
-
-
 
         }
 
        // return messageOut;
     }
-
-
 
 }

@@ -21,7 +21,10 @@ public class Shot extends Move {
         this.aimCell = aimCell;
 
     }
-
+    public CellBoard getAimCell ()
+    {
+        return aimCell;
+    }
 
     @Override
     public void make() {

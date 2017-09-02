@@ -1,16 +1,14 @@
 package ru.neochess.core.GeneratorsMove.AnimalsMoves;
 
-import ru.neochess.core.AdjacentCell;
 import ru.neochess.core.CellBoard;
 import ru.neochess.core.GeneratorsMove.IGeneratorMove;
-import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorMoveOneStep;
-import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorMoveOneStepDiag;
+import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorMoveOneStepHor;
+import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorShotHorizontal;
+import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorShotVertical;
 import ru.neochess.core.Move.Move;
-import ru.neochess.core.Move.Shot;
 import ru.neochess.core.TypeGamer;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -22,87 +20,18 @@ public class GeneratorMovePorcupine implements IGeneratorMove {
    // List<Shot> result1 = new ArrayList<>();
 
     public List<Move> getMove(CellBoard currentCell, TypeGamer typeGamer) {
-       // CellBoard next;
-        CellBoard nextS;
-        Move move;
-        Integer shotDist = 4;
-        Integer shotSteps;
 
-        //дикообраз
+        GeneratorMoveOneStepHor MoveOneStep = new GeneratorMoveOneStepHor();
+        GeneratorShotVertical ShotVertial = new GeneratorShotVertical();
+        GeneratorShotHorizontal ShotHorizontal = new GeneratorShotHorizontal();
 
+        ShotHorizontal.setShotDist(4);
+        ShotVertial.setShotDist(4);
 
-        Iterator<CellBoard> upS = currentCell.getIterator(AdjacentCell.Up);
-        Iterator<CellBoard> downS = currentCell.getIterator(AdjacentCell.Down);
-        Iterator<CellBoard> rightS = currentCell.getIterator(AdjacentCell.Right);
-        Iterator<CellBoard> leftS = currentCell.getIterator(AdjacentCell.Left);
-
-        // движение вверх, вниз, вперед назад на одну клетку
-        GeneratorMoveOneStep MoveOneStep = new GeneratorMoveOneStep();
         result.addAll(MoveOneStep.getMove(currentCell,typeGamer));
-
-        //выстрелы по вертикалям и горизонталям
-
-        // горизонтали вертикали
-
-        //1.
-        shotSteps = 1;
-        do { if (upS.hasNext()) {
-            nextS = upS.next();
-            move = createMove(currentCell, nextS);
-           // result.add(move);
-        } else move = null;
-
-        } while ((move != null)&&(shotSteps++ <= shotDist));
-
-        //2.
-        shotSteps = 1;
-        do {
-            if (rightS.hasNext()) {
-                nextS = rightS.next();
-                move = createMove(currentCell, nextS);
-               // result.add(move);
-            } else move = null;
-
-        } while ((move != null)&&(shotSteps++ <= shotDist));
-
-        //3.
-        shotSteps = 1;
-        do {
-            if (downS.hasNext()) {
-                nextS = downS.next();
-                move = createMove(currentCell, nextS);
-               // result.add(move);
-            } else move = null;
-
-        } while ((move != null)&&(shotSteps++ <= shotDist));
-
-        //4.
-        shotSteps = 1;
-        do {
-            if (leftS.hasNext()) {
-                nextS = leftS.next();
-                move = createMove(currentCell, nextS);
-              //  result.add(move);
-            } else move = null;
-
-        } while ((move != null)&&(shotSteps++ <= shotDist));
+        result.addAll(ShotHorizontal.getMove(currentCell,typeGamer));
+        result.addAll(ShotVertial.getMove(currentCell,typeGamer));
 
         return result;
-    }
-
-    protected Move createMove(CellBoard currentCell, CellBoard next) {
-
-        if (next.getCoreFigure() == null) {
-            return (new Move(currentCell, next, currentCell.getCoreFigure()));
-        }
-        else if (next.getCoreFigure() != null)
-            AttackMove(currentCell, next);
-
-        return null;
-    }
-
-    protected void AttackMove(CellBoard currentCell, CellBoard next) {
-        result.add(new Shot(currentCell, next, currentCell.getCoreFigure(), next.getCoreFigure()));
-
     }
 }

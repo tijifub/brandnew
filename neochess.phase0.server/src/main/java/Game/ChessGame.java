@@ -17,7 +17,7 @@ public class ChessGame {
             if (player1 == null) {
                 gameID = UUID.randomUUID().toString();
                 player1 = new Player();
-                player1.race = 'P';
+                player1.race = 'W';
                 player1.ID = gameID + "_1";
                 player1.name = Name;
                 player1.NID = 0;
@@ -28,7 +28,7 @@ public class ChessGame {
 
             } else if (player2 == null) {
                 player2 = new Player();
-                player2.race = 'A';
+                player2.race = 'B';
                 player2.ID = gameID + "_2";
                 player2.name = Name;
                 player2.NID = 1;

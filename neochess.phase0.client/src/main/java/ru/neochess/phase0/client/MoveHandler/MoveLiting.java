@@ -21,7 +21,7 @@ public class MoveLiting {
     {
         ru.neochess.phase0.client.Figure figure = chessboard.grabbed_figure;
 
-        moveList = figure.getMoveGenerator(x, y);
+        moveList = figure.getMoveGenerator(x, y, chessboard.encodeBoard());
         chessboard.setMoveList(moveList);
 
     }

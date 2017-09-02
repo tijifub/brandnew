@@ -5,6 +5,6 @@ package ru.neochess.core;
  * Created by diviz on 07.01.2017.
  */
 public enum TypeGamer {
-    White,
-    Black
+    W,
+    B
 }

@@ -61,7 +61,7 @@ public class GeneratorMovePawn implements IGeneratorMove {
 
         if (leftUp.hasNext()) {
             next = leftUp.next();
-            move = createMove(currentCell, next);
+            move = attackMove(currentCell, next);
             if (move != null) {
                 result.add(move);
             }
@@ -69,7 +69,7 @@ public class GeneratorMovePawn implements IGeneratorMove {
 
         if (rightUp.hasNext()) {
             next = rightUp.next();
-            move = createMove(currentCell, next);
+            move = attackMove(currentCell, next);
             if (move != null) {
                 result.add(move);
             }
@@ -83,9 +83,9 @@ public class GeneratorMovePawn implements IGeneratorMove {
 
     }
 
-    protected Move createMove(CellBoard currentCell, CellBoard next) {
+    protected Move attackMove(CellBoard currentCell, CellBoard next) {
 
-        if (next.getCoreFigure() != null) {
+        if (next.getCoreFigure() != null && (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
             return (new Move(currentCell, next, currentCell.getCoreFigure()));
         }
 

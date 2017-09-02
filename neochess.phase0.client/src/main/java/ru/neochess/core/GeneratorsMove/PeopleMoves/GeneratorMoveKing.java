@@ -1,15 +1,13 @@
 package ru.neochess.core.GeneratorsMove.PeopleMoves;
 
-import ru.neochess.core.AdjacentCell;
 import ru.neochess.core.CellBoard;
 import ru.neochess.core.GeneratorsMove.IGeneratorMove;
-import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorMoveOneStep;
+import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.*;
 import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorMoveOneStepDiag;
 import ru.neochess.core.Move.Move;
 import ru.neochess.core.TypeGamer;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -23,9 +21,11 @@ public class GeneratorMoveKing implements IGeneratorMove {
         CellBoard next;
         Move move;
 
-        GeneratorMoveOneStep MoveOneStep = new GeneratorMoveOneStep();
+        GeneratorMoveOneStepHor MoveOneStepHor = new GeneratorMoveOneStepHor();
+        GenetatorMoveOneStepVert MoveOneStepVert = new GenetatorMoveOneStepVert();
         GeneratorMoveOneStepDiag MoveOneStepDiag = new GeneratorMoveOneStepDiag();
-        result.addAll(MoveOneStep.getMove(currentCell,typeGamer));
+        result.addAll(MoveOneStepHor.getMove(currentCell,typeGamer));
+        result.addAll(MoveOneStepVert.getMove(currentCell, typeGamer));
         result.addAll(MoveOneStepDiag.getMove(currentCell,typeGamer));
 
         return result;

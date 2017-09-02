@@ -10,8 +10,6 @@ import java.lang.reflect.Method;
 
 
 import ru.neochess.core.*;
-import ru.neochess.core.GeneratorsMove.AnimalsMoves.*;
-import ru.neochess.core.GeneratorsMove.PeopleMoves.*;
 import ru.neochess.core.Move.Move;
 import ru.neochess.core.CoreBoard;
 
@@ -42,6 +40,7 @@ public class Figure {
     public Figure(LibItem lib) {
         this.lib = lib;
         this.code = lib.getCode();
+       // this.race = lib.getRace();
 //        if(this.code == "L") {
 //            System.out.println("archer detected");
 //        }
@@ -52,11 +51,15 @@ public class Figure {
         }
         this.moveGenerator = lib.getMoveGenerator();
 
-      /*  CustomClassLoader ccl = new CustomClassLoader();
-        Object o;
-        Class c;
-        c = ccl.loadClass("someNewClass");*/
 
+        try {
+            moveGeneratorClass = Class.forName("ru.neochess.core.GeneratorsMove." + moveGenerator);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+     /*
         try {
             moveGeneratorClass = Class.forName("ru.neochess.core.GeneratorsMove." + moveGenerator);
 
@@ -70,29 +73,35 @@ public class Figure {
         }
     catch (IllegalAccessException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
-   public java.util.List<Move> getMoveGenerator(int x, int y)
-   {
+   public java.util.List<Move> getMoveGenerator(int x, int y, String positionEncoded) {
        java.util.List<Move> result = null;
        CellBoard cell;
-       coreBoard = new CoreBoard();
+       coreBoard = new CoreBoard(positionEncoded);
+      TypeGamer typeGamer = TypeGamer.valueOf("W");
+
+
        try {
 
-       Method m = moveGeneratorClass.getMethod("getMove", CellBoard.class , TypeGamer.class );
-          cell = coreBoard.getCellByIndex(x, y );
+           Method m = moveGeneratorClass.getMethod("getMove", CellBoard.class, TypeGamer.class);
+           cell = coreBoard.getCellByIndex(x, y);
            try {
-              result = (List<Move>) m.invoke(moveGeneratorObj, cell, TypeGamer.Black);
+               moveGeneratorObj = moveGeneratorClass.newInstance();
+               typeGamer = TypeGamer.valueOf(this.race);
+
+               result = (List<Move>) m.invoke(moveGeneratorObj, cell, typeGamer);
            } catch (IllegalAccessException e) {
                e.printStackTrace();
            } catch (InvocationTargetException e) {
                e.printStackTrace();
            }
-
+       } catch (InstantiationException e) {
+           e.printStackTrace();
        } catch (NoSuchMethodException e) {
-       e.printStackTrace();
-   }
+           e.printStackTrace();
+       }
 
        return result;}
 

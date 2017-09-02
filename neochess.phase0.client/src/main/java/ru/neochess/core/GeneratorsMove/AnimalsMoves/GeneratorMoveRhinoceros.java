@@ -73,12 +73,17 @@ public class GeneratorMoveRhinoceros implements IGeneratorMove {
 
         if (next.getCoreFigure() == null) {
             return (new Move(currentCell, next, currentCell.getCoreFigure()));
-        } else AttackMove(currentCell, next, it);
+        } else if (next.getCoreFigure().getTypeGamer() == currentCell.getCoreFigure().getTypeGamer())
+        {
+            return null;
+        }
+        else {
+            attackMove(currentCell, next, it);
+            return null;
+        }
 
-        return null;
     }
-
-    protected void AttackMove(CellBoard currentCell, CellBoard next, Iterator<CellBoard> it) {
+    protected void attackMove(CellBoard currentCell, CellBoard next, Iterator<CellBoard> it) {
         if (it.hasNext())
         next = it.next();
 

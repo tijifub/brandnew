@@ -2,6 +2,7 @@ package ru.neochess.core.GeneratorsMove.SimpleMovePatterns;
 
 import ru.neochess.core.AdjacentCell;
 import ru.neochess.core.CellBoard;
+import ru.neochess.core.GeneratorsMove.IGeneratorMove;
 import ru.neochess.core.Move.Move;
 import ru.neochess.core.TypeGamer;
 
@@ -10,9 +11,9 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by TiJi on 05.08.17.
+ * Created by TiJi on 02.09.17.
  */
-public class GeneratorMoveOneStep {
+public class GenetatorMoveOneStepVert implements IGeneratorMove {
 
     List<Move> result = new ArrayList<>();
 
@@ -22,42 +23,25 @@ public class GeneratorMoveOneStep {
 
         Iterator<CellBoard> up = currentCell.getIterator(AdjacentCell.Up);
         Iterator<CellBoard> down = currentCell.getIterator(AdjacentCell.Down);
-        Iterator<CellBoard> right = currentCell.getIterator(AdjacentCell.Right);
-        Iterator<CellBoard> left = currentCell.getIterator(AdjacentCell.Left);
+
 
         if (down.hasNext()) {
             next = down.next();
-            //   if (next.getFigure() == null) {
-            result.add(new Move(currentCell, next,
+            if ((next.getCoreFigure() == null)||(next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
+                result.add(new Move(currentCell, next,
                     currentCell.getCoreFigure()));
-            //  }
+              }
         }
 
         if (up.hasNext()) {
             next = up.next();
-            //  if (next.getFigure() == null) {
+            if ((next.getCoreFigure() == null)||(next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
             result.add(new Move(currentCell, next,
                     currentCell.getCoreFigure()));
-            //   }
+            }
         }
 
-        if (left.hasNext()) {
-            next = left.next();
-            //   if (next.getFigure() == null) {
-            result.add(new Move(currentCell, next,
-                    currentCell.getCoreFigure()));
-            //  }
-        }
-
-        if (right.hasNext()) {
-            next = right.next();
-            //  if (next.getFigure() == null) {
-            result.add(new Move(currentCell, next,
-                    currentCell.getCoreFigure()));
-            // }
-        }
 
         return result;
     }
-
 }

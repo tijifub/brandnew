@@ -49,8 +49,8 @@ public class MoveHandler {
 
             selectFigure = null;
             newFigure.printCells();
-            chessBoard.move = newFigure.printNotation();
-            chessBoard.addTextArea1(newFigure.printNotation());
+            chessBoard.moveNotation = newFigure.printNotation();
+            chessBoard.addTextArea1(chessBoard.moveNotation);
             newFigure = null;
 
             //myTurn = false; // изменнение пешки считается ходом.
@@ -59,6 +59,7 @@ public class MoveHandler {
         else {return false; }
 
     }
+
     public boolean moveBegin(int X, int Y, ChessBoard chessBoard)
     {
         MoveLiting liting;
@@ -69,14 +70,17 @@ public class MoveHandler {
         if (from_row < 0 || from_row > 9) return false;
         if (from_col < 0 || from_col > 9) return false;
 
+        Figure tfigure = chessBoard.board.getCellByIndex(from_row, from_col).getFigure();
 
-        //liting = new MoveLiting(chessBoard , from_col, from_row);
+        if(tfigure==null) return false;
+        if (tfigure.getRace().equals(chessBoard.clientState.sessionData.race) == false) return false;
 
-        chessBoard.grabbed_figure = chessBoard.board.getCellByIndex(from_row, from_col).getFigure();
 
+        chessBoard.grabbed_figure = tfigure;
         chessBoard.grabbed_figure.setMousePos(chessBoard.board.getCellByIndex(from_row, from_col));
 
-        if(chessBoard.grabbed_figure==null) return false;
+
+        //  if (chessBoard.grabbed_figure.getRace().equals(chessBoard.clientState.sessionData.race) == false) return false;
 
         liting = new MoveLiting(chessBoard , from_col, from_row);
 
@@ -129,11 +133,32 @@ public class MoveHandler {
             chessBoard.grabbed_figure.placeOnBoard(chessBoard.board, row_col);
 
         chessBoard.grabbed_figure.printCells();
-        chessBoard.move = chessBoard.grabbed_figure.printNotation();
-        chessBoard.addTextArea1(chessBoard.grabbed_figure.printNotation());
+        chessBoard.moveNotation = chessBoard.grabbed_figure.printNotation();
+        chessBoard.addTextArea1(chessBoard.moveNotation);
 
         chessBoard.grabbed_figure = null;
      return true;
+    }
+
+    public boolean moveKill (int X, int Y, ChessBoard chessBoard)
+    {
+        Map<String,Integer> row_col = new HashMap();
+
+        to_row = (Y - chessBoard.gap) / chessBoard.cellsize;
+        to_col = (X - chessBoard.gap) / chessBoard.cellsize;
+
+        Figure figureAim = chessBoard.board.getCellByIndex(to_row, to_col).getFigure();
+
+        if (figureAim == null) return false;
+        else
+        {
+            figureAim.printCells();
+            chessBoard.moveNotation = figureAim.printNotation();
+            chessBoard.addTextArea1(chessBoard.moveNotation);
+            chessBoard.board.removeFigure(figureAim);
+            return true;
+        }
+
     }
 
 }

@@ -4,6 +4,7 @@ import ru.neochess.core.GeneratorsMove.IGeneratorMove;
 import ru.neochess.core.Move.Move;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,6 +25,18 @@ public class CoreFigure {
 
     public CoreFigure(TypeGamer typeGamer, TypeFigure typeFigure) {
         this(null, typeGamer, typeFigure);
+    }
+
+
+    public CoreFigure (String code , String race)
+    {
+       // TypeFigure typeFigure = Arrays.stream(TypeFigure.values()).filter((ft) -> ft.getFigureCode().equals(code));
+        TypeFigure typeFigure = Arrays.stream(TypeFigure.values()).filter((ft) -> ft.getFigureCode().equals(code)).findFirst().orElse(null);
+        TypeGamer typeGamer = TypeGamer.valueOf(race);
+
+
+        this.typeFigure = typeFigure;
+        this.typeGamer = typeGamer;
     }
 
     public TypeFigure getTypeFigure() {

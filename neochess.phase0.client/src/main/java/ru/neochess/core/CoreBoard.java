@@ -46,11 +46,7 @@ public class CoreBoard {
 
             if (!pieceCode.equalsIgnoreCase("Z")) {
 
-             //   this.cell_matrix[row][col].setCoreFigure();
-
-               // row_col.put("row", row);
-               // row_col.put("col", col);
-               // Figure currentFigure =  board.putFigure(pieceRace,pieceState,pieceCode, fl, board, row_col);
+                this.cell_matrix[col][row].setCoreFigure(new CoreFigure(pieceCode, pieceRace));
 
             }
 

@@ -5,7 +5,7 @@ package ru.neochess.phase0.client;
  */
 public class BoardCell {
     private int row, col;
-    private Figure figure;
+    private Figure figure = null;
 
     public BoardCell(int row, int col) {
         this.row = row;

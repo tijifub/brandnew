@@ -66,7 +66,7 @@ public class StateReady extends State  implements ClientState {
             Enemy = wrapper.sessionData.enemyName = msg.getUser(0).getName();
         }
 
-        if (wrapper.sessionData.race.equals("P"))
+        if (wrapper.sessionData.race.equals("W"))
         {
             wrapper.setCurrent(new StateMove());
             System.out.println("I am P");
@@ -74,7 +74,7 @@ public class StateReady extends State  implements ClientState {
             JOptionPane.showMessageDialog(null, "Welcome to NeoChess! People is your race!", "Hi, " + UserName + ". Your enemy is " + Enemy, JOptionPane.PLAIN_MESSAGE);
 
         }
-        else if (wrapper.sessionData.race.equals("A")) {
+        else if (wrapper.sessionData.race.equals("B")) {
             wrapper.setCurrent(new StateWait());
             System.out.println("I am A");
             wrapper.chessBoard.chessclient.setTitle("|NeoChess| " + UserName + " playing for animals");

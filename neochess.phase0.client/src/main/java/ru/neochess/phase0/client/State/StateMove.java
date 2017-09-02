@@ -10,18 +10,17 @@ import ru.neochess.phase0.client.ChessBoard;
 public class StateMove extends State  implements ClientState {
 
     @Override
-    public void sendMove(String board, String move) {
+    public void sendMove(String board, String moveNotation) {
 
-     //   wrapper.sendMSG(board);
+     // wrapper.sendMSG(board);
         ChessMessage.User.Builder user = ChessMessage.User.newBuilder();
         user.setId(wrapper.sessionData.userID);
-
         ChessMessage.NeoCheMessage.Builder messageBuilder = ChessMessage.NeoCheMessage.newBuilder();
         messageBuilder.addUser(user);
         messageBuilder.setState("move");
         messageBuilder.setSessionId(wrapper.sessionData.gameID);
         messageBuilder.setBoard(board);
-        messageBuilder.setMove(move);
+        messageBuilder.setMove(moveNotation);
         ChessMessage.NeoCheMessage message =  messageBuilder.build();
        // System.out.println(message);
         wrapper.sendToServer(message);
