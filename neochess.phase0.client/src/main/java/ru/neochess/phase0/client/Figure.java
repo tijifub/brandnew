@@ -40,10 +40,7 @@ public class Figure {
     public Figure(LibItem lib) {
         this.lib = lib;
         this.code = lib.getCode();
-       // this.race = lib.getRace();
-//        if(this.code == "L") {
-//            System.out.println("archer detected");
-//        }
+
         try {
             this.img = new ImageIcon(getClass().getResource(lib.getImgPath()));
         } catch (Exception e) {
@@ -59,21 +56,7 @@ public class Figure {
             e.printStackTrace();
         }
 
-     /*
-        try {
-            moveGeneratorClass = Class.forName("ru.neochess.core.GeneratorsMove." + moveGenerator);
 
-            // Class<?> movetstClass = Class.forName("Board");
-              moveGeneratorObj = moveGeneratorClass.newInstance();
-            // Object moveGeneratorObj = movetstClass.newInstance();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
-    catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }*/
     }
 
    public java.util.List<Move> getMoveGenerator(int x, int y, String positionEncoded) {
@@ -166,9 +149,9 @@ public class Figure {
     return xshift;}
 
     public int getImageYshift()
-    { int a;
-        if (this.getCode() == "H")
-        a = 1;
+    { //int a;
+       // if (this.getCode() == "H")
+       // a = 1;
 
         int yshift = 0;
         switch (MousePos) {
@@ -181,26 +164,9 @@ public class Figure {
 
         }
 
-        return yshift;}
-  /*  //для слоника
-    public int getCol() {
-
-        int a;
-        if (MousePos > -1){
-           // if (this.getCode() == "H")
-               // a = 1;
-        return cells.get(MousePos).getCol();}
-        else
-        return cells.get(0).getCol();
+        return yshift;
     }
 
-
-    public int getRow() {
-       if (MousePos > -1)
-            return cells.get(MousePos).getRow();
-        else
-        return cells.get(0).getRow();
-    }*/
 
     public int getxCoord() {
         int minX = 10*50 + 50; // правый столбец
@@ -238,17 +204,22 @@ public class Figure {
         System.out.println(mess);
     }
     public String printNotation() {
-        String mess = ""+this.getCode();
-
+       // String mess = ""+this.getCode();
+        String mess = ""+this.getDesc() + " ";
         if(cells==null || cells.isEmpty()) {
             mess += "клеток нет";
             System.out.println(mess);
             return mess;
         }
 
-        for(BoardCell c : cells) {
-            mess += String.valueOf((char)(c.getCol() + 'A')) + (10 - c.getRow());
-        }
+        mess += String.valueOf((char)(cells.get(0).getCol() + 'A')) + (10 - cells.get(0).getRow());
+
+        if (cells.size() > 1)
+            mess += String.valueOf((char)(cells.get(cells.size() - 1).getCol() + 'A')) + (10 - cells.get(cells.size() - 1).getRow());
+
+        // for(BoardCell c : cells) {
+         //   mess += String.valueOf((char)(c.getCol() + 'A')) + (10 - c.getRow());
+        //}
 
         return mess;
     }

@@ -19,11 +19,16 @@ public class MoveLiting {
     java.util.List<Move> moveList = new ArrayList<>();
     MoveLiting(ChessBoard chessboard, int x, int y)
     {
-        ru.neochess.phase0.client.Figure figure = chessboard.grabbed_figure;
+        ru.neochess.phase0.client.Figure figure = chessboard.getGrabbed_figure();
 
         moveList = figure.getMoveGenerator(x, y, chessboard.encodeBoard());
         chessboard.setMoveList(moveList);
 
+    }
+    public boolean moveInList()
+    {
+
+        return true;
     }
 
 

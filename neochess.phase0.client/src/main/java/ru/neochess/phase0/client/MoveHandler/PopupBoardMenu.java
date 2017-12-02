@@ -17,6 +17,9 @@ public class PopupBoardMenu {
     int y;
     ChessBoard board = null;
     String moveNotation = null;
+    MoveHandler moveHandler;
+
+
 
     ActionListener menuListener = new ActionListener() {
         public void actionPerformed(ActionEvent event) {
@@ -24,12 +27,15 @@ public class PopupBoardMenu {
             System.out.println("Popup menu item ["
                     + event.getActionCommand() + "] was pressed.");
 
-            MoveHandler moveHandler = new MoveHandler();
-            if (moveHandler.moveKill(x, y, board)) {
-                String encoding = board.encodeBoard();
-                System.out.println(encoding);
+
+            if (moveHandler.moveKill(x, y)) {
+
                 moveNotation = board.moveNotation;
-                board.clientState.getCurrent().sendMove( encoding, moveNotation);
+                if (board.getUnlimitedMoves() == false) {
+                    String encoding = board.encodeBoard();
+                    System.out.println(encoding);
+                    board.clientState.getCurrent().sendMove( encoding, moveNotation);
+                }
                 board.repaint();
             }
 
@@ -37,19 +43,23 @@ public class PopupBoardMenu {
     };
 
 
-    public PopupBoardMenu(ChessBoard b)
+    public PopupBoardMenu(ChessBoard b, MoveHandler m)
     {
+
         JMenuItem item = new JMenuItem("Kill");
         item.addActionListener(menuListener);
         popup.add(item);
         board = b;
+        moveHandler = m;
     }
 
     public void ShowMunu (int x, int y)
     {
-        this.x = x;
-        this.y = y;
-        popup.show(board, x ,y);
+        if (moveHandler.menuKill(x, y)) {
+            this.x = x;
+            this.y = y;
+            popup.show(board, x, y);
+        }
     }
 
 }

@@ -33,23 +33,30 @@ import java.util.List;
             {
                 firstStep = true;
 
-                CellBoard prev = up.next();
-                CoreFigure prevF = prev.getCoreFigure();
-                if (prevF  != null) // ход от вожака
-                    if (prevF.getTypeFigure().equals(TypeFigure.Leader))
-                        firstStepFromLeader = true;
+                CellBoard prev;
+                CoreFigure prevF;
+                if (up.hasNext()) {
+                    prev = up.next();
+                    prevF = prev.getCoreFigure();
+                    if (prevF != null) // ход от вожака
+                        if (prevF.getTypeFigure().equals(TypeFigure.Leader))
+                            firstStepFromLeader = true;
+                }
 
-                prev = leftup.next();
-                prevF = prev.getCoreFigure();
-                if (prevF  != null) // ход от вожака
-                    if (prevF.getTypeFigure().equals(TypeFigure.Leader))
-                        firstStepFromLeader = true;
-
-                prev = rightup.next();
-                prevF = prev.getCoreFigure();
-                 if (prevF  != null) // ход от вожака
-                    if (prevF.getTypeFigure().equals(TypeFigure.Leader))
-                        firstStepFromLeader = true;
+                if (leftup.hasNext()) {
+                    prev = leftup.next();
+                    prevF = prev.getCoreFigure();
+                    if (prevF != null) // ход от вожака
+                        if (prevF.getTypeFigure().equals(TypeFigure.Leader))
+                            firstStepFromLeader = true;
+                }
+                if (rightup.hasNext()) {
+                    prev = rightup.next();
+                    prevF = prev.getCoreFigure();
+                    if (prevF != null) // ход от вожака
+                        if (prevF.getTypeFigure().equals(TypeFigure.Leader))
+                            firstStepFromLeader = true;
+                }
             }
 
 

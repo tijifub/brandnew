@@ -39,7 +39,7 @@ public class GeneratorMoveHorse implements IGeneratorMove {
                 leftdown = next.getIterator(AdjacentCell.LeftDown);
                 if (leftdown.hasNext()) {
                     next2 = leftdown.next();
-                    if (next.getCoreFigure() != null && (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
+                    if ((next2.getCoreFigure() == null) || (next2.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
                         result.add(new Move(currentCell, next2, currentCell.getCoreFigure()));
                     }
                 }
@@ -48,7 +48,7 @@ public class GeneratorMoveHorse implements IGeneratorMove {
                 rightdown = next.getIterator(AdjacentCell.RightDown);
                 if (rightdown.hasNext()) {
                     next2 = rightdown.next();
-                    if (next.getCoreFigure() != null && (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
+                    if ((next2.getCoreFigure() == null) || (next2.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
                         result.add(new Move(currentCell, next2, currentCell.getCoreFigure()));
                     }
                 }
@@ -61,7 +61,7 @@ public class GeneratorMoveHorse implements IGeneratorMove {
                 leftUp = next.getIterator(AdjacentCell.LeftUp);
                 if (leftdown.hasNext()) {
                     next2 = leftUp.next();
-                    if (next.getCoreFigure() != null && (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
+                    if ((next2.getCoreFigure() == null) || (next2.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
                         result.add(new Move(currentCell, next2, currentCell.getCoreFigure()));
                     }
                 }
@@ -70,7 +70,7 @@ public class GeneratorMoveHorse implements IGeneratorMove {
                 rightUp = next.getIterator(AdjacentCell.RightUp);
                 if (rightdown.hasNext()) {
                     next2 = rightUp.next();
-                    if (next.getCoreFigure() != null && (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
+                    if ((next2.getCoreFigure() == null) || (next2.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
                         result.add(new Move(currentCell, next2, currentCell.getCoreFigure()));
                     }
                 }
@@ -83,7 +83,7 @@ public class GeneratorMoveHorse implements IGeneratorMove {
             rightUp = next.getIterator(AdjacentCell.RightUp);
             if (rightUp.hasNext()) {
                 next2 = rightUp.next();
-                if (next.getCoreFigure() != null && (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
+                if ((next2.getCoreFigure() == null) || (next2.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
                     result.add(new Move(currentCell, next2, currentCell.getCoreFigure()));
                 }
             }
@@ -92,7 +92,7 @@ public class GeneratorMoveHorse implements IGeneratorMove {
             rightdown = next.getIterator(AdjacentCell.RightDown);
             if (rightdown.hasNext()) {
                 next2 = rightdown.next();
-                if (next.getCoreFigure() != null && (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
+                if ((next2.getCoreFigure() == null) || (next2.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
                     result.add(new Move(currentCell, next2, currentCell.getCoreFigure()));
                 }
             }
@@ -104,7 +104,7 @@ public class GeneratorMoveHorse implements IGeneratorMove {
             leftUp = next.getIterator(AdjacentCell.LeftUp);
             if (leftUp.hasNext()) {
                 next2 = leftUp.next();
-                if (next.getCoreFigure() != null && (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
+                if ((next2.getCoreFigure() == null) || (next2.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
                     result.add(new Move(currentCell, next2, currentCell.getCoreFigure()));
                 }
             }
@@ -112,7 +112,7 @@ public class GeneratorMoveHorse implements IGeneratorMove {
             leftdown = next.getIterator(AdjacentCell.LeftDown);
             if (leftdown.hasNext()) {
                 next2 = leftdown.next();
-                if (next.getCoreFigure() != null && (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
+                if ((next2.getCoreFigure() == null) || (next2.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())) {
                     result.add(new Move(currentCell, next2, currentCell.getCoreFigure()));
                 }
             }

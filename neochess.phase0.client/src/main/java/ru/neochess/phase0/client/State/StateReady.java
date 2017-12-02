@@ -14,7 +14,7 @@ public class StateReady extends State  implements ClientState {
     public StateReady() {
 
        if (UserName.isEmpty()) {
-            UserName = JOptionPane.showInputDialog("UserName");
+            UserName = JOptionPane.showInputDialog("Ваше имя");
         }
 
     }
@@ -70,17 +70,18 @@ public class StateReady extends State  implements ClientState {
         {
             wrapper.setCurrent(new StateMove());
             System.out.println("I am P");
-            wrapper.chessBoard.chessclient.setTitle("|NeoChess| " + UserName + " playing for people");
-            JOptionPane.showMessageDialog(null, "Welcome to NeoChess! People is your race!", "Hi, " + UserName + ". Your enemy is " + Enemy, JOptionPane.PLAIN_MESSAGE);
+            wrapper.chessBoard.chessclient.setTitle( UserName + " (Люди) vs " + Enemy + " (Животные)" );
+            JOptionPane.showMessageDialog(null, "Это NeoChess! Вам досталась раса людей",  UserName + ". Вы играете против " + Enemy, JOptionPane.PLAIN_MESSAGE);
 
         }
         else if (wrapper.sessionData.race.equals("B")) {
             wrapper.setCurrent(new StateWait());
             System.out.println("I am A");
-            wrapper.chessBoard.chessclient.setTitle("|NeoChess| " + UserName + " playing for animals");
-            JOptionPane.showMessageDialog(null, "Welcome to NeoChess! Your race is Animal!", "Hi, " + UserName + ". Your enemy is " + Enemy, JOptionPane.PLAIN_MESSAGE);
+            wrapper.chessBoard.chessclient.setTitle( UserName + " (Животные) vs " + Enemy + " (Люди)") ;
+            JOptionPane.showMessageDialog(null, "Это NeoChess! Вам досталась раса животных", UserName + ", Вы играете против " + Enemy, JOptionPane.PLAIN_MESSAGE);
 
         }
+        wrapper.chessBoard.repaint();
 
     }
 
@@ -96,28 +97,15 @@ public class StateReady extends State  implements ClientState {
         messageBuilder.addUser(user);
         messageBuilder.setState("ready");
         ChessMessage.NeoCheMessage message =  messageBuilder.build();
-       // System.out.println(message);
         wrapper.sendToServer(message);
 
-        wrapper.chessBoard.chessclient.setTitle("|NeoChess| " + UserName + " waiting for enemy...");
+        wrapper.chessBoard.chessclient.setTitle("|NeoChess| " + UserName + " ждет соперника...");
 
     }
 
     @Override
     public void recieveColor( char color) {
-    /*    if (color == 'W') {
-        //    wrapper.setCurrent(new StateMove());
-            System.out.println("I am W");
-            wrapper.chessBoard.chessclient.setTitle("NeoChess. " + UserName + " playing for people");
-            JOptionPane.showMessageDialog(null, "People is your race!", "Hi, " + UserName + "! Welcome to NeoChess", JOptionPane.PLAIN_MESSAGE);
 
-        } else if (color == 'B') {
-          //  wrapper.setCurrent(new StateWait());
-            System.out.println("I am B");
-            wrapper.chessBoard.chessclient.setTitle("NeoChess. " + UserName + " playing for animals");
-            JOptionPane.showMessageDialog(null, "Your race is Animal!", "Hi, " + UserName + "! Welcome to NeoChess", JOptionPane.PLAIN_MESSAGE);
-
-        }*/
     }
 
         @Override

@@ -13,12 +13,12 @@ import ru.neochess.phase0.client.CheMessage.ChessMessage.User;
 public class StateEnd extends State implements ClientState {
 
     public StateEnd(ClientStateWrapper wrapper ) {
-        JOptionPane.showMessageDialog(null, "END OF GAME", "InfoBox: " + "GAME END", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Игра закончена", "InfoBox: " + "Игра закончена", JOptionPane.INFORMATION_MESSAGE);
 
     }
 
     public StateEnd() {
-        JOptionPane.showMessageDialog(null, "END OF GAME", "InfoBox: " + "GAME END", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Игра закончена", "InfoBox: " + "Игра закончена", JOptionPane.INFORMATION_MESSAGE);
        // wrapper.chessBoard.addTextArea1("GAME END");
     }
 
@@ -50,7 +50,7 @@ public class StateEnd extends State implements ClientState {
         user.setId(wrapper.sessionData.userID);
         user.setName(wrapper.sessionData.userName);
 
-        NeoCheMessage.Builder messageBuilder =NeoCheMessage.newBuilder();
+        NeoCheMessage.Builder messageBuilder = NeoCheMessage.newBuilder();
         messageBuilder.addUser(user);
         messageBuilder.setState("end");
         messageBuilder.setSessionId(wrapper.sessionData.gameID);

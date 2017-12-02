@@ -46,7 +46,7 @@ public class ChessClient extends JFrame
 		exitItem.addActionListener(e -> board.exitBoard());
 
 		resetItem.addActionListener(e -> board.resetBoard());
-
+		String command;
 		// Cоздание многострочных полей
 
 		// Шрифт и табуляция
@@ -58,13 +58,36 @@ public class ChessClient extends JFrame
 		area1.setFont(font);
 		area1.setForeground(Color.white);
 		area1.setTabSize(0);
-
 		//Color color=new Color(255,255,255);
 
 		//Set JTextArea background color to color that you choose
 		area1.setBackground(Color.black);
 
+		area1.addKeyListener(new KeyListener() {
+								 @Override
+								 public void keyTyped(KeyEvent e) {
 
+									 if (e.getKeyChar() == 'u')
+									 {System.out.println(e.getKeyChar());
+									 	board.setUnlimitedMoves();}
+
+									 if (e.getKeyChar() == 'n')
+									 {System.out.println(e.getKeyChar());
+										 board.setNoRules();}
+								 }
+
+								 @Override
+								 public void keyPressed(KeyEvent e) {
+									// System.out.println(e.getKeyChar());
+
+								 }
+
+								 @Override
+								 public void keyReleased(KeyEvent e) {
+									// System.out.println(e.getKeyChar());
+								 }
+							 }
+		);
 		// Добавим поля в окно
 
 		cont.add(new JScrollPane(area1), BorderLayout.EAST);
@@ -72,9 +95,6 @@ public class ChessClient extends JFrame
 
 		setResizable(false);
 		setSize(800,645);
-
-
-
 
 	}
 	public void  addTextToArea1 (String line)
