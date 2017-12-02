@@ -47,7 +47,7 @@ public class FiguresLibrary {
                     return board;
             }));
 
-            add(new LibItem("H", "Слон", "/figures/animals/slon.png","A","AnimalsMoves.GeneratorMoveElephant", (board, rc, figure) -> {
+            add(new LibItem("H", "Слон", "/figures/animals/slon.png","A","AnimalsMoves.GeneratorMoveElephant", 4, (board, rc, figure) -> {
                // figure = board.findFigureByCode();
 
                 int pos = figure.getMousePos();

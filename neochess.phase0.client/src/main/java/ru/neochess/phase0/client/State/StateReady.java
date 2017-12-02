@@ -82,6 +82,7 @@ public class StateReady extends State  implements ClientState {
 
         }
         wrapper.chessBoard.repaint();
+        wrapper.chessBoard.setInitialBoard();
 
     }
 

@@ -165,7 +165,7 @@ public class ChessBoard extends JPanel implements ImageObserver, MouseListener, 
         Graphics2D gfx = (Graphics2D) g;
         drawOffscreen();
         gfx.drawImage(image_buffer, 0, 0, this);
-        setInitialBoard();
+        //setInitialBoard();
     }
 
     private void drawOffscreen()

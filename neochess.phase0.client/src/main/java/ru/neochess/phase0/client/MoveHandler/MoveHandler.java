@@ -25,6 +25,40 @@ public class MoveHandler {
         board =b;
     }
 
+    public int getCol(int X)
+    {
+        int col = (X - board.gap) / board.cellsize;
+        if (board.race.equals("B"))
+            col = board.cellnum - 1 - col;
+
+        return col;
+    }
+    public int getRow(int Y)
+    {
+        int row = (Y - board.gap) / board.cellsize;
+        if (board.race.equals("B"))
+            row = board.cellnum - 1 - row;
+
+        return row;
+    }
+
+    public Figure getFigure (int X, int Y)
+    {
+        from_row = getRow(Y);
+        from_col = getCol(X);
+
+        if (!checkBoarders(from_col, from_row)) return null;
+
+        Figure f = chessBoard.getBoard().getCellByIndex(from_row, from_col).getFigure();
+
+        return f;
+    }
+    public Boolean checkBoarders (int col , int row)
+    {
+        if (row < 0 || row > (board.cellnum - 1) || col < 0 || col > (board.cellnum - 1)) return false;
+        else return true;
+    }
+
     public boolean figureTransform(int X, int Y) {
 
 
@@ -33,15 +67,9 @@ public class MoveHandler {
         Figure selectFigure;
         Figure newFigure;
 
-        from_row = (Y - board.gap) / board.cellsize;
-        from_col = (X - board.gap) / board.cellsize;
+        selectFigure = getFigure(X, Y);
 
-        if (from_row < 0 || from_row > 9) return false;
-        if (from_col < 0 || from_col > 9) return false;
-
-
-        selectFigure = chessBoard.getBoard().getCellByIndex(from_row, from_col).getFigure();
-        if (selectFigure.getRace().equals(chessBoard.clientState.sessionData.race) == false) return false;
+        if (selectFigure.getRace().equals(chessBoard.getBoard().race) == false) return false;
 
         //обычная пешка
         if (selectFigure != null &&
@@ -73,23 +101,17 @@ public class MoveHandler {
 
     public boolean moveBegin(int X, int Y)
     {
+        Figure tfigure;
 
-        from_row = (Y - board.gap) / board.cellsize;
-        from_col = (X - board.gap) / board.cellsize;
+        if ((tfigure = getFigure(X, Y)) == null) return false;
 
-        if (from_row < 0 || from_row > 9) return false;
-        if (from_col < 0 || from_col > 9) return false;
+        if (!(tfigure.getRace().equals(chessBoard.getBoard().race))) return false;
 
-        Figure tfigure = chessBoard.getBoard().getCellByIndex(from_row, from_col).getFigure();
-
-        if(tfigure==null) return false;
-        if (tfigure.getRace().equals(chessBoard.clientState.sessionData.race) == false) return false;
-
+        from_row = getRow(Y);
+        from_col = getCol(X);
 
         chessBoard.setGrabbed_figure(tfigure);
         chessBoard.getGrabbed_figure().setMousePos(chessBoard.getBoard().getCellByIndex(from_row, from_col));
-
-        //  if (chessBoard.grabbed_figure.getRace().equals(chessBoard.clientState.sessionData.race) == false) return false;
 
         liting = new MoveLiting(chessBoard , from_col, from_row);
 
@@ -104,10 +126,10 @@ public class MoveHandler {
 
         if(chessBoard.getGrabbed_figure() == null) return false;
 
-        to_row = (Y - board.gap) / board.cellsize;
-        to_col = (X - board.gap) / board.cellsize;
+        to_row = getRow(Y);
+        to_col = getCol(X);
 
-        if (to_row < 0 || to_row > 9 || to_col < 0 || to_col > 9) {
+        if (!checkBoarders(to_col,to_row)) {
 //
             row_col.put("row", from_row);
             row_col.put("col", from_col);
@@ -148,6 +170,7 @@ public class MoveHandler {
         chessBoard.addTextArea1(chessBoard.moveNotation);
 
         chessBoard.setGrabbed_figure(null);
+
      return true;
     }
 
@@ -155,13 +178,13 @@ public class MoveHandler {
     {
         Map<String,Integer> row_col = new HashMap();
 
-        to_row = (Y - board.gap) / board.cellsize;
-        to_col = (X - board.gap) / board.cellsize;
+        to_row = getRow(Y);
+        to_col = getCol(X);
 
         figureAim = chessBoard.getBoard().getCellByIndex(to_row, to_col).getFigure();
 
         if (figureAim == null) return false;
-        else if (figureAim.getRace().equals(chessBoard.clientState.sessionData.race) == true) return false;
+        else if (figureAim.getRace().equals(chessBoard.getBoard().race) == true) return false;
         else return true;
 
     }

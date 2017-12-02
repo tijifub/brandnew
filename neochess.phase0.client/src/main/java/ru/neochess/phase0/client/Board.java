@@ -26,6 +26,9 @@ public class Board {
     public int boardsize = 600;
     //private ArrayList<BoardCell> cells = new ArrayList<>(); // все клетки доски
     private BoardCell cell_matrix[][] = new BoardCell[10][10];
+    public String race = new String();
+
+
 
     private ArrayList<Figure> figures= new ArrayList<>();
 
@@ -60,6 +63,9 @@ public class Board {
     public BoardCell getCellByIndex(int row, int col) {
         return this.cell_matrix[row][col];
     }
+  /*  public BoardCell getCellByRelIndex(int row, int col) {
+        return this.cell_matrix[row][col];
+    }*/
 
     public Figure putFigure (String pieceRace,String pieceState, String pieceCode, FiguresLibrary fl, Board board, Map<String,Integer> row_col)
     {
@@ -125,7 +131,10 @@ public class Board {
         if (observer.clientState.sessionData != null) {
 
             //РИСУЕМ ДОСКУ ДЛЯ ЛЮДЕЙ (БЕЛЫХ)
-            if (observer.clientState.sessionData.race.equals("W")) {
+            if (observer.clientState.sessionData.race.equals("") != true)
+                race = observer.clientState.sessionData.race;
+
+            if (race.equals("W")) {
 
 
                 for (char a = 'A'; a <= 'J'; a++) {
@@ -152,7 +161,7 @@ public class Board {
                 }
 
         // РИСУЕМ ДОСКУ ДЛЯ ЖИВОТНЫХ (ЧЕРНЫХ)
-            } else if (observer.clientState.sessionData.race.equals("B")) {
+            } else if (race.equals("B")) {
 
                 for (char a = 'J'; a >= 'A'; a--) {
 
@@ -173,7 +182,6 @@ public class Board {
                     gfx.drawString(String.valueOf(n).toString(), x + txtleft, y);
 
                     y += cellsize;
-
 
                 }
 
@@ -209,6 +217,7 @@ public class Board {
 
         for (Figure f : figures) {
             try {
+                f.setBoard(this);
                 gfx.drawImage(f.getImage(), f.getxCoord() + gap + 2, f.getyCoord() + gap + 2, observer);
             } catch (Exception ex) {
                 System.out.println(ex.toString());
@@ -237,6 +246,10 @@ public class Board {
                 x = shot.getAimCell().getCell().getX();
                 y = shot.getAimCell().getCell().getY();
 
+            if (race.equals("B")) {
+                x = cellnum - x - 1;
+                y = cellnum - y - 1;
+            }
                 gfx.fillRect(x * cellsize + gap, y * cellsize + gap, cellsize, cellsize);
 
 
@@ -246,6 +259,11 @@ public class Board {
                 if (move.getTo() != null) {
                     x = move.getTo().getCell().getX();
                     y = move.getTo().getCell().getY();
+
+                    if (race.equals("B")) {
+                        x = cellnum - x - 1;
+                        y = cellnum - y - 1;
+                    }
 
                     gfx.setColor(new Color(255, 255, 0, 50));
 
