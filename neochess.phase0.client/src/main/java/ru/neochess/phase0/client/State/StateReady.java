@@ -5,6 +5,9 @@ import ru.neochess.phase0.client.ChessBoard;
 import javax.swing.*;
 import ru.neochess.phase0.client.CheMessage.ChessMessage.NeoCheMessage;
 import ru.neochess.phase0.client.CheMessage.ChessMessage;
+
+import java.awt.*;
+
 /**
  * Created by TiJi on 03.12.16.
  */
@@ -65,12 +68,14 @@ public class StateReady extends State  implements ClientState {
             wrapper.sessionData.enemyID = msg.getUser(0).getId();
             Enemy = wrapper.sessionData.enemyName = msg.getUser(0).getName();
         }
+        Font font = new Font("Arial", Font.BOLD, 14);
 
         if (wrapper.sessionData.race.equals("W"))
         {
             wrapper.setCurrent(new StateMove());
             System.out.println("I am P");
             wrapper.chessBoard.chessclient.setTitle( UserName + " (Люди) vs " + Enemy + " (Животные)" );
+
             JOptionPane.showMessageDialog(null, "Это NeoChess! Вам досталась раса людей",  UserName + ". Вы играете против " + Enemy, JOptionPane.PLAIN_MESSAGE);
 
         }

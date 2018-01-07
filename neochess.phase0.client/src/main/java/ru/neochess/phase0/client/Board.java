@@ -6,7 +6,9 @@ import com.sun.corba.se.impl.orbutil.graph.Graph;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
+
 import com.google.protobuf.*;
+import ru.neochess.core.Move.Castling;
 import ru.neochess.core.Move.Move;
 import ru.neochess.core.Move.Shot;
 
@@ -29,15 +31,13 @@ public class Board {
     public String race = new String();
 
 
+    private ArrayList<Figure> figures = new ArrayList<>();
 
-    private ArrayList<Figure> figures= new ArrayList<>();
+    public void Clear() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
 
-    public void Clear()
-    {
-        for (int i=0; i<10; i++){
-            for(int j=0; j<10; j++){
-
-                    this.cell_matrix[i][j].clear();
+                this.cell_matrix[i][j].clear();
 
             }
         }
@@ -53,8 +53,8 @@ public class Board {
     }*/
 
     public Board() {
-        for (int i=0; i<10; i++){
-            for(int j=0; j<10; j++){
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
                 this.cell_matrix[i][j] = new BoardCell(i, j);
             }
         }
@@ -67,8 +67,7 @@ public class Board {
         return this.cell_matrix[row][col];
     }*/
 
-    public Figure putFigure (String pieceRace,String pieceState, String pieceCode, FiguresLibrary fl, Board board, Map<String,Integer> row_col)
-    {
+    public Figure putFigure(String pieceRace, String pieceState, String pieceCode, FiguresLibrary fl, Board board, Map<String, Integer> row_col) {
         Figure currentFigure = null;
 
         if (pieceCode.equals("H")) {
@@ -79,8 +78,7 @@ public class Board {
             currentFigure = figures.stream().filter(figure1 -> pieceCode.equals(figure1.getCode())).findAny().orElse(null);
 
         }
-        if (currentFigure == null)
-        {
+        if (currentFigure == null) {
             currentFigure = fl.getFigureByCode(pieceCode);
             figures.add(currentFigure);
             currentFigure.setState(pieceState);
@@ -91,21 +89,22 @@ public class Board {
         return currentFigure;
 
     }
-    public void saveFigure(Figure f){
 
-            if (!figures.contains(f)) {
+    public void saveFigure(Figure f) {
+
+        if (!figures.contains(f)) {
             figures.add(f);
         }
-     }
+    }
 
-    public void removeFigure(Figure f){
-        if(figures.contains(f)){
+    public void removeFigure(Figure f) {
+        if (figures.contains(f)) {
             figures.remove(f);
         }
 
         // удалить также из всех клеток
-        for (int i=0; i<10; i++){
-            for(int j=0; j<10; j++){
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
                 if (this.cell_matrix[i][j].getFigure() == f) {
                     this.cell_matrix[i][j].clear();
                 }
@@ -148,11 +147,11 @@ public class Board {
                 }
 
                 x = 0;
-                y = cellsize + cellsize/2;
+                y = cellsize + cellsize / 2;
 
                 for (int n = cellnum; n >= 1; n--) {
 
-                    gfx.drawString(String.valueOf(n).toString(), x+ gap + cellsize * cellnum + txtright, y);
+                    gfx.drawString(String.valueOf(n).toString(), x + gap + cellsize * cellnum + txtright, y);
 
                     gfx.drawString(String.valueOf(n).toString(), x + txtleft, y);
 
@@ -160,7 +159,7 @@ public class Board {
 
                 }
 
-        // РИСУЕМ ДОСКУ ДЛЯ ЖИВОТНЫХ (ЧЕРНЫХ)
+                // РИСУЕМ ДОСКУ ДЛЯ ЖИВОТНЫХ (ЧЕРНЫХ)
             } else if (race.equals("B")) {
 
                 for (char a = 'J'; a >= 'A'; a--) {
@@ -174,10 +173,10 @@ public class Board {
                 }
 
                 x = 0;
-                y = cellsize + cellsize/2;
+                y = cellsize + cellsize / 2;
                 for (int n = 1; n <= cellnum; n++) {
 
-                    gfx.drawString(String.valueOf(n).toString(), x+ gap + cellsize * cellnum + txtright, y);
+                    gfx.drawString(String.valueOf(n).toString(), x + gap + cellsize * cellnum + txtright, y);
 
                     gfx.drawString(String.valueOf(n).toString(), x + txtleft, y);
 
@@ -196,8 +195,7 @@ public class Board {
                 for (int j = 0; j < cellnum; j++) {
                     if (b) {
                         gfx.setColor(Color.white);
-                    }
-                    else {
+                    } else {
                         gfx.setColor(Color.gray);
                     }
                     b = !b;
@@ -210,6 +208,7 @@ public class Board {
             }
         }
     }
+
     public void paintFigures(Graphics2D gfx, ChessBoard observer) {
         int gap = 50;
         int cell = 50;
@@ -227,8 +226,7 @@ public class Board {
     }
 
 
-    public void renderCellLiting(Graphics2D gfx, java.util.List<Move> moveList)
-    {
+    public void renderCellLiting(Graphics2D gfx, java.util.List<Move> moveList) {
         Move move;
         Shot shot;
         int x;
@@ -239,22 +237,20 @@ public class Board {
         for (int i = 0; i < moveList.size(); i++) {
             move = moveList.get(i);
 
-            if (move instanceof Shot)
-            {
+            if (move instanceof Shot) {
                 gfx.setColor(new Color(227, 9, 37, 64));
                 shot = (Shot) move;
                 x = shot.getAimCell().getCell().getX();
                 y = shot.getAimCell().getCell().getY();
 
-            if (race.equals("B")) {
-                x = cellnum - x - 1;
-                y = cellnum - y - 1;
-            }
+                if (race.equals("B")) {
+                    x = cellnum - x - 1;
+                    y = cellnum - y - 1;
+                }
                 gfx.fillRect(x * cellsize + gap, y * cellsize + gap, cellsize, cellsize);
 
 
-            }
-            else if (move instanceof Move) {
+            } else if (move instanceof Castling) {
 
                 if (move.getTo() != null) {
                     x = move.getTo().getCell().getX();
@@ -264,14 +260,55 @@ public class Board {
                         x = cellnum - x - 1;
                         y = cellnum - y - 1;
                     }
-
                     gfx.setColor(new Color(255, 255, 0, 50));
 
                     gfx.fillRect(x * cellsize + gap, y * cellsize + gap, cellsize, cellsize);
+
+                    x = ((Castling) move).getWifeFrom().getCell().getX();
+                    y = ((Castling) move).getWifeFrom().getCell().getY();
+
+                 /*   if (race.equals("B")) {
+                        x = cellnum - x - 1;
+                        y = cellnum - y - 1;
+                    }
+
+                    gfx.setColor(new Color(0, 255, 255, 100));
+
+                    gfx.fillRect(x * cellsize + gap, y * cellsize + gap, cellsize, cellsize);
+
+
+                    x = ((Castling) move).getWifeTo().getCell().getX();
+                    y = ((Castling) move).getWifeTo().getCell().getY();
+
+                    if (race.equals("B")) {
+                        x = cellnum - x - 1;
+                        y = cellnum - y - 1;
+                    }
+
+                    gfx.setColor(new Color(0, 100, 255, 100));
+
+                    gfx.fillRect(x * cellsize + gap, y * cellsize + gap, cellsize, cellsize);*/
                 }
             }
 
+            else if (move.getTo() != null) {
+                x = move.getTo().getCell().getX();
+                y = move.getTo().getCell().getY();
+
+                if (race.equals("B")) {
+                    x = cellnum - x - 1;
+                    y = cellnum - y - 1;
+                }
+
+                gfx.setColor(new Color(255, 255, 0, 50));
+
+                gfx.fillRect(x * cellsize + gap, y * cellsize + gap, cellsize, cellsize);
+
+            }
         }
+
+
     }
 }
+
 

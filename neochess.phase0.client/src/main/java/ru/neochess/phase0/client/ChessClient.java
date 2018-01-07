@@ -19,7 +19,7 @@ public class ChessClient extends JFrame
 	//JEditorPane editorPane = new JEditorPane();
 	//StyleContext sc = new StyleContext();
 	//final DefaultStyledDocument doc = new DefaultStyledDocument(sc);
-	JTextArea area1 = new JTextArea("|NeoChess|", 0, 15);
+	JTextArea area1 = new JTextArea("", 0, 15);
 
 	//JScrollPane editorScrollPane = new JScrollPane(editorPane);
 

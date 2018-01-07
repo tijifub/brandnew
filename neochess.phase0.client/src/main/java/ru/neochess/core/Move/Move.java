@@ -68,7 +68,7 @@ public class Move implements IMove {
     }
 
     //TODO: Нарушаем принципы чистого кода. Вынести в отдельный интерфейс стратегию
-    @Override
+   @Override
     public Boolean isCharacteristicsMove(CharacteristicsMove characteristicsMove) {
         if (oldCoreFigureTo == null) {
             return false;

@@ -5,7 +5,9 @@ import ru.neochess.core.GeneratorsMove.IGeneratorMove;
 import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorMoveOneStepHor;
 import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorMoveOneStepDiag;
 import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GenetatorMoveOneStepVert;
+import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorShortCastling;
 import ru.neochess.core.Move.Move;
+import ru.neochess.core.TypeFigure;
 import ru.neochess.core.TypeGamer;
 
 import java.util.ArrayList;
@@ -29,6 +31,14 @@ public class GeneratorMoveLeader implements IGeneratorMove {
         result.addAll(MoveOneStepVert.getMove(currentCell, typeGamer));
         result.addAll(MoveOneStepDiag.getMove(currentCell,typeGamer));
 
+        if (currentCell.getCell().getY() == 0)
+        {
+            GeneratorShortCastling shortCastling = new GeneratorShortCastling();
+            shortCastling.setWife(TypeFigure.Rhinoceros);
+            shortCastling.setDist(2);
+            result.addAll(shortCastling.getMove(currentCell,typeGamer));
+        }
+        
         return result;
     }
 }

@@ -55,9 +55,6 @@ public class FiguresLibrary {
                 {
                     case 0:
 
-
-
-
                         board.getCellByIndex(rc.get("row"), rc.get("col")).placeIn(figure);
                         board.getCellByIndex(rc.get("row"), rc.get("col") + 1).placeIn(figure);
                         board.getCellByIndex(rc.get("row") + 1, rc.get("col")).placeIn(figure);
