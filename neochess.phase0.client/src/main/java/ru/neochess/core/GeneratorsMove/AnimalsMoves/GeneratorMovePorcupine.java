@@ -5,6 +5,7 @@ import ru.neochess.core.GeneratorsMove.IGeneratorMove;
 import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorMoveOneStepHor;
 import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorShotHorizontal;
 import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GeneratorShotVertical;
+import ru.neochess.core.GeneratorsMove.SimpleMovePatterns.GenetatorMoveOneStepVert;
 import ru.neochess.core.Move.Move;
 import ru.neochess.core.TypeGamer;
 
@@ -21,14 +22,18 @@ public class GeneratorMovePorcupine implements IGeneratorMove {
 
     public List<Move> getMove(CellBoard currentCell, TypeGamer typeGamer) {
 
-        GeneratorMoveOneStepHor MoveOneStep = new GeneratorMoveOneStepHor();
+        GeneratorMoveOneStepHor MoveOneStepHor = new GeneratorMoveOneStepHor();
+        GenetatorMoveOneStepVert MoveOneStepVert = new GenetatorMoveOneStepVert();
+
         GeneratorShotVertical ShotVertial = new GeneratorShotVertical();
         GeneratorShotHorizontal ShotHorizontal = new GeneratorShotHorizontal();
 
         ShotHorizontal.setShotDist(4);
         ShotVertial.setShotDist(4);
 
-        result.addAll(MoveOneStep.getMove(currentCell,typeGamer));
+        result.addAll(MoveOneStepHor.getMove(currentCell,typeGamer));
+        result.addAll(MoveOneStepVert.getMove(currentCell, typeGamer));
+
         result.addAll(ShotHorizontal.getMove(currentCell,typeGamer));
         result.addAll(ShotVertial.getMove(currentCell,typeGamer));
 

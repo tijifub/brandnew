@@ -8,33 +8,41 @@ import ru.neochess.core.TypeFigure;
  * Ход
  * Created by diviz on 10.12.2016.
  */
-public class Move implements IMove {
+public class RinoAttack extends Move implements IMove {
 
-    protected final CellBoard from, to;
+    protected final CellBoard from, to, victimCell;
+
+
+    private final CoreFigure victim;
+
     private final CoreFigure oldCoreFigureFrom;
     private final CoreFigure oldCoreFigureTo;
     private final CoreFigure coreFigureTo;
     private final CoreFigure coreFigureFrom;
 
-    public Move(CellBoard from, CellBoard to, CoreFigure coreFigureTo) {
-        this(from, to, null, coreFigureTo);
+    public RinoAttack(CellBoard from, CellBoard to, CoreFigure coreFigureTo, CellBoard victimCell, CoreFigure victim) {
+        this(from, to, null, coreFigureTo, victimCell, victim);
     }
 
-    public Move(CellBoard from, CellBoard to, CoreFigure coreFigureFrom, CoreFigure coreFigureTo) {
+    public RinoAttack(CellBoard from, CellBoard to, CoreFigure coreFigureFrom, CoreFigure coreFigureTo, CellBoard victimCell, CoreFigure victim) {
         this.from = from;
         this.to = to;
         this.coreFigureTo = coreFigureTo;
         this.coreFigureFrom = coreFigureFrom;
+        this.victim = victim;
+        this.victimCell = victimCell;
         oldCoreFigureTo = to.getCoreFigure();
         oldCoreFigureFrom = from.getCoreFigure();
 
     }
 
-    public Move() {
+    public RinoAttack() {
         this.from = null;
         this.to = null;
         this.coreFigureTo = null;
         this.coreFigureFrom = null;
+        this.victimCell = null;
+        this.victim = null;
         oldCoreFigureTo = null;
         oldCoreFigureFrom = null;
 
@@ -74,8 +82,15 @@ public class Move implements IMove {
         return to;
     }
 
+    public CellBoard getVictimCell() {
+        return victimCell;
+    }
+
     public CoreFigure getCoreFigureTo() {
         return coreFigureTo;
+    }
+    public CoreFigure getVictim() {
+        return victim;
     }
 
     @Override
@@ -83,7 +98,7 @@ public class Move implements IMove {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Move move = (Move) o;
+        RinoAttack move = (RinoAttack) o;
         if (getFrom() != null ? !getFrom().equals(move.getFrom()) : move.getFrom() != null) return false;
         if (getTo() != null ? !getTo().equals(move.getTo()) : move.getTo() != null) return false;
         if (oldCoreFigureFrom != null ? !oldCoreFigureFrom.equals(move.oldCoreFigureFrom) : move.oldCoreFigureFrom != null)
@@ -92,17 +107,7 @@ public class Move implements IMove {
     }
 
     @Override
-    public int hashCode() {
-        int result = getFrom() != null ? getFrom().hashCode() : 0;
-        result = 31 * result + (getTo() != null ? getTo().hashCode() : 0);
-        result = 31 * result + (oldCoreFigureFrom != null ? oldCoreFigureFrom.hashCode() : 0);
-        result = 31 * result + (getCoreFigureTo() != null ? getCoreFigureTo().hashCode() : 0);
-
-        return result;
-    }
-
-    @Override
     public String toString() {
-        return from + "->" + to + ":" + coreFigureTo;
+        return from + "=>" + to + ":" + coreFigureTo;
     }
 }

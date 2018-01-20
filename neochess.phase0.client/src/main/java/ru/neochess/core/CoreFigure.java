@@ -34,7 +34,6 @@ public class CoreFigure {
         TypeFigure typeFigure = Arrays.stream(TypeFigure.values()).filter((ft) -> ft.getFigureCode().equals(code)).findFirst().orElse(null);
         TypeGamer typeGamer = TypeGamer.valueOf(race);
 
-
         this.typeFigure = typeFigure;
         this.typeGamer = typeGamer;
     }

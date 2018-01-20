@@ -53,11 +53,6 @@ public class Shot extends Move {
     }
 
     @Override
-    public Boolean isCharacteristicsMove(CharacteristicsMove characteristicsMove) {
-        return null;
-    }
-
-    @Override
     public String toString() {
         return killer + ":" + killerCell + "->>" + aim + ":" + aimCell;
     }

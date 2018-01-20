@@ -2,9 +2,12 @@ package ru.neochess.core.GeneratorsMove.AnimalsMoves;
 
 import ru.neochess.core.AdjacentCell;
 import ru.neochess.core.CellBoard;
+import ru.neochess.core.CoreFigure;
 import ru.neochess.core.GeneratorsMove.IGeneratorMove;
 import ru.neochess.core.Move.Move;
+import ru.neochess.core.Move.RinoAttack;
 import ru.neochess.core.TypeGamer;
+import ru.neochess.phase0.client.Figure;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,6 +22,8 @@ public class GeneratorMoveRhinoceros implements IGeneratorMove {
 
     public List<Move> getMove(CellBoard currentCell, TypeGamer typeGamer) {
         CellBoard next;
+
+
         Move move;
 
         Iterator<CellBoard> up = currentCell.getIterator(AdjacentCell.Up);
@@ -31,7 +36,7 @@ public class GeneratorMoveRhinoceros implements IGeneratorMove {
         do { if (up.hasNext()) {
             next = up.next();
             move = createMove(currentCell, next, up);
-            result.add(move);
+            if (move != null) result.add(move);
         } else move = null;
 
         } while (move != null);
@@ -41,7 +46,7 @@ public class GeneratorMoveRhinoceros implements IGeneratorMove {
             if (right.hasNext()) {
                 next = right.next();
                 move = createMove(currentCell, next, right);
-                result.add(move);
+                if (move != null) result.add(move);
             } else move = null;
 
         } while (move != null);
@@ -51,7 +56,7 @@ public class GeneratorMoveRhinoceros implements IGeneratorMove {
             if (down.hasNext()) {
                 next = down.next();
                 move = createMove(currentCell, next, down);
-                result.add(move);
+                if (move != null) result.add(move);
             } else move = null;
 
         } while (move != null);
@@ -61,7 +66,7 @@ public class GeneratorMoveRhinoceros implements IGeneratorMove {
             if (left.hasNext()) {
                 next = left.next();
                 move = createMove(currentCell, next, left);
-                result.add(move);
+                if (move != null) result.add(move);
             } else move = null;
 
         } while (move != null);
@@ -71,23 +76,26 @@ public class GeneratorMoveRhinoceros implements IGeneratorMove {
 
     protected Move createMove(CellBoard currentCell, CellBoard next, Iterator<CellBoard> it) {
 
+        CellBoard victimCell;
+        CoreFigure victim;
+
         if (next.getCoreFigure() == null) {
             return (new Move(currentCell, next, currentCell.getCoreFigure()));
-        } else if (next.getCoreFigure().getTypeGamer() == currentCell.getCoreFigure().getTypeGamer())
+        } else if (next.getCoreFigure().getTypeGamer() != currentCell.getCoreFigure().getTypeGamer())
         {
-            return null;
-        }
-        else {
-            attackMove(currentCell, next, it);
-            return null;
+            victim = next.getCoreFigure();
+            victimCell = next;
+            attackMove(currentCell, next, it, victim, victimCell);
         }
 
+        return null;
     }
-    protected void attackMove(CellBoard currentCell, CellBoard next, Iterator<CellBoard> it) {
+    protected void attackMove(CellBoard currentCell, CellBoard next, Iterator<CellBoard> it, CoreFigure victim, CellBoard victimCell) {
+
         if (it.hasNext())
         next = it.next();
 
-        result.add(new Move(currentCell, next, currentCell.getCoreFigure()));
+        result.add(new RinoAttack(currentCell, next, currentCell.getCoreFigure(), victimCell, victim));
 
     }
 }

@@ -10,6 +10,7 @@ import java.util.Map;
 import com.google.protobuf.*;
 import ru.neochess.core.Move.Castling;
 import ru.neochess.core.Move.Move;
+import ru.neochess.core.Move.RinoAttack;
 import ru.neochess.core.Move.Shot;
 
 
@@ -289,6 +290,33 @@ public class Board {
 
                     gfx.fillRect(x * cellsize + gap, y * cellsize + gap, cellsize, cellsize);*/
                 }
+            }
+            else if (move instanceof RinoAttack) {
+                x = move.getTo().getCell().getX();
+                y = move.getTo().getCell().getY();
+
+                if (race.equals("B")) {
+                    x = cellnum - x - 1;
+                    y = cellnum - y - 1;
+                }
+
+                gfx.setColor(new Color(255, 255, 0, 50));
+
+                gfx.fillRect(x * cellsize + gap, y * cellsize + gap, cellsize, cellsize);
+
+                x = ((RinoAttack) move).getVictimCell().getCell().getX();
+                y = ((RinoAttack) move).getVictimCell().getCell().getY();
+
+                if (race.equals("B")) {
+                    x = cellnum - x - 1;
+                    y = cellnum - y - 1;
+                }
+
+                gfx.setColor(new Color(227, 9, 37, 64));
+
+                gfx.fillRect(x * cellsize + gap, y * cellsize + gap, cellsize, cellsize);
+
+
             }
 
             else if (move.getTo() != null) {

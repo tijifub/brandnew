@@ -1,12 +1,13 @@
 package ru.neochess.phase0.client.MoveHandler;
 
+import ru.neochess.core.Move.*;
 import ru.neochess.phase0.client.*;
 import ru.neochess.phase0.client.Figure;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import ru.neochess.core.*;
 /**
  * Created by TiJi on 05.02.17.
  */
@@ -41,13 +42,19 @@ public class MoveHandler {
         return row;
     }
 
-    public Figure getFigure(int X, int Y) {
+    public Figure getFigureByMousePos(int X, int Y) {
         from_row = getRow(Y);
         from_col = getCol(X);
 
-        if (!checkBoarders(from_col, from_row)) return null;
+        Figure f = getFigureByRowCol(from_col,from_row);
 
-        Figure f = chessBoard.getBoard().getCellByIndex(from_row, from_col).getFigure();
+        return f;
+    }
+
+    public Figure getFigureByRowCol(int col, int row)
+    {
+        if (!checkBoarders(col, row)) return null;
+        Figure f = chessBoard.getBoard().getCellByIndex(row, col).getFigure();
 
         return f;
     }
@@ -65,7 +72,7 @@ public class MoveHandler {
         Figure selectFigure;
         Figure newFigure;
 
-        selectFigure = getFigure(X, Y);
+        selectFigure = getFigureByMousePos(X, Y);
 
         if (selectFigure.getRace().equals(chessBoard.getBoard().race) == false) return false;
 
@@ -102,7 +109,7 @@ public class MoveHandler {
     public boolean moveBegin(int X, int Y) {
         Figure tfigure;
 
-        if ((tfigure = getFigure(X, Y)) == null) return false;
+        if ((tfigure = getFigureByMousePos(X, Y)) == null) return false;
 
         if (!(tfigure.getRace().equals(chessBoard.getBoard().race))) return false;
 
@@ -122,6 +129,8 @@ public class MoveHandler {
     public boolean moveEnd(int X, int Y) {
         Map<String, Integer> row_col = new HashMap();
 
+        Move move;
+
         if (chessBoard.getGrabbed_figure() == null) return false;
 
         to_row = getRow(Y);
@@ -139,6 +148,18 @@ public class MoveHandler {
             return false;
         }
 
+        move = identifyMove();
+
+        if (move == null)
+        {
+            //здесь окно с предупреждениями и звуковой сигнал
+
+            System.out.println("Wrong move");
+
+            to_row = from_row;
+            to_col = from_col;
+        }
+
         if (from_row == to_row && from_col == to_col)
 
         {
@@ -153,11 +174,6 @@ public class MoveHandler {
             return false;
         }
 
-        // if (chessBoard.setNoRules() == false)
-
-       // Arrays.asList(chessBoard.getMoveList()).contains()
-
-
         chessBoard.getBoard().saveFigure(chessBoard.getGrabbed_figure());
 
         row_col.put("row", to_row);
@@ -170,6 +186,14 @@ public class MoveHandler {
         chessBoard.addTextArea1(chessBoard.moveNotation);
 
         chessBoard.setGrabbed_figure(null);
+
+        if (move instanceof RinoAttack)
+        {
+            Cell cell = ((RinoAttack) move).getVictimCell().getCell();
+
+            board.removeFigure(getFigureByRowCol(cell.getX(),cell.getY()));
+            //board.removeFigure(getFigureByMousePos(cell.getX(),cell.getY()));
+        }
 
         return true;
     }
@@ -228,7 +252,7 @@ public class MoveHandler {
             figureAim.printCells();
             chessBoard.moveNotation = figureAim.printNotation() + " убит";
             chessBoard.addTextArea1(chessBoard.moveNotation);
-            chessBoard.getBoard().removeFigure(figureAim);
+            board.removeFigure(figureAim);
             return true;
         }
 
@@ -238,6 +262,7 @@ public class MoveHandler {
         Map<String, Integer> row_col = new HashMap();
 
         if (selectFigure == null) return false;
+        else if (!isLegalMove()) {return false;}
         else {
             selectFigure.printCells();
             chessBoard.moveNotation = "0-0 короткая рокировка";
@@ -285,7 +310,9 @@ public class MoveHandler {
         Map<String, Integer> row_col = new HashMap();
 
         if (selectFigure == null) return false;
+        else if (!isLegalMove()) {return false;}
         else {
+
             selectFigure.printCells();
             chessBoard.moveNotation = "0-0-0 длинная рокировка";
             chessBoard.addTextArea1(chessBoard.moveNotation);
@@ -316,7 +343,20 @@ public class MoveHandler {
     }
 
     public boolean isLegalMove() {
-        return true;
+        if (identifyMove() != null) return true;
+        return false;
+    }
+
+    public Move identifyMove()
+    {
+        for (Move m : chessBoard.getMoveList())
+        {
+            if (m.equals(from_row, from_col, to_row, to_col))
+                return m;
+
+        }
+
+        return null;
     }
 
 }

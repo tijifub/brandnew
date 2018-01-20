@@ -17,5 +17,5 @@ public interface IMove {
 
     CoreFigure getCoreFigureTo();
 
-   Boolean isCharacteristicsMove(CharacteristicsMove characteristicsMove);
+  // Boolean isCharacteristicsMove(CharacteristicsMove characteristicsMove);
 }

@@ -17,7 +17,7 @@ public class WarMode extends Move {
 
        this.warCell = warCell;
         this.warCoreFigure = warCoreFigure;
-       // simpleFigure = warCell.getFigure();
+       // simpleFigure = warCell.getFigureByMousePos();
 
     }
     @Override
@@ -45,12 +45,7 @@ public class WarMode extends Move {
         return null;
     }
 
-    @Override
-    public Boolean isCharacteristicsMove(CharacteristicsMove characteristicsMove) {
-        return null;
-    }
-
-    @Override
+      @Override
     public String toString() {
         return warCoreFigure + ":" + warCell + ">>";
     }
